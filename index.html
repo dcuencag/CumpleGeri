@@ -137,6 +137,10 @@
       width: 100%;
     }
 
+    @keyframes photoIn {
+      from { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(.7); }
+      to   { opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1); }
+    }
     .photo-card {
       position: absolute;
       background: #f8f3ea;
@@ -150,6 +154,9 @@
       transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
       transition: transform .18s ease, box-shadow .18s ease, z-index 0s;
       will-change: transform;
+      opacity: 0;
+      animation: photoIn .4s ease forwards;
+      animation-delay: var(--delay);
     }
     .photo-card:hover {
       transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(1.08);
@@ -336,7 +343,7 @@ const IMAGES = {
 
     const card = document.createElement('div');
     card.className = 'photo-card';
-    card.style.cssText = `--tx:${tx}px;--ty:${ty}px;--rot:${rot}deg;--card-w:${cardW}px;left:0;top:0;z-index:${zi};`;
+    card.style.cssText = `--tx:${tx}px;--ty:${ty}px;--rot:${rot}deg;--card-w:${cardW}px;--delay:${i * 0.18}s;left:0;top:0;z-index:${zi};`;
     const img = document.createElement('img');
     img.src = src; img.alt = name;
     const cap = document.createElement('p');
